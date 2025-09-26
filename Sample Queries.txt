@@ -1,0 +1,56 @@
+Since your **RAG** (retrieval-augmented generation) is built on **Fake.csv** and **True.csv**, the dataset contains **real and fake news headlines/articles**. To test your system, you’ll want queries that:
+
+1. **Exist in your dataset** → should return a strong True/False.
+2. **Paraphrased from dataset** → checks similarity search.
+3. **Not in dataset** → should trigger “I’m not sure, here are related articles.”
+
+Here’s a **set of 20 queries** you can use to test:
+
+---
+
+### ✅ Queries that should be **True (Real News)**
+
+1. “Donald Trump met with Russian officials in Washington.”
+2. “North Korea agrees to suspend nuclear tests temporarily.”
+3. “Apple announces record profits for the fourth quarter.”
+4. “Scientists discover a new species of dinosaur in Argentina.”
+5. “UN Security Council passes resolution on Syria.”
+
+---
+
+### ❌ Queries that should be **False (Fake News)**
+
+6. “Pope Francis endorses Donald Trump for president.”
+7. “Obama bans the national anthem in schools.”
+8. “NASA confirms Earth will experience 15 days of darkness in November.”
+9. “Hillary Clinton sells weapons to ISIS.”
+10. “Mark Zuckerberg announces Facebook will start charging users.”
+
+---
+
+### 🔄 Paraphrased Queries (tests fuzzy matching)
+
+11. “Trump holds private talks with Russian diplomats at the White House.”
+12. “Apple reports highest ever quarterly earnings.”
+13. “Scientists in South America identify previously unknown dinosaur.”
+14. “United Nations adopts a resolution about the Syrian conflict.”
+15. “North Korea halts nuclear activities as part of new deal.”
+
+---
+
+### ❓ Queries not in dataset (tests fallback to retrieval / articles list)
+
+16. “Elon Musk unveils a new Tesla phone.”
+17. “Pakistan wins the ICC Cricket World Cup 2023.”
+18. “India successfully lands a rover on the moon’s south pole.”
+19. “Amazon launches its own cryptocurrency for online shopping.”
+20. “Microsoft announces acquisition of Netflix.”
+
+---
+
+👉 With this set:
+
+* Queries 1–5 should come back **True** with high confidence.
+* Queries 6–10 should come back **False** with high confidence.
+* Queries 11–15 should also be answered confidently (since they’re close matches).
+* Queries 16–20 may return **uncertain** with “related articles” from your RAG.
